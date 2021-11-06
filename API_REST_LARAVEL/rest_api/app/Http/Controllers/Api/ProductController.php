@@ -24,7 +24,9 @@ class ProductController extends Controller
     }
 
     public function show(Product $id) {
-        $data =  ['data' => $id];
+        $product = $this->product->find($id);
+        if(! $product) return response()->json(['data' => ['msg' => 'Produto não encontrado']],404);
+        $data  = ['data' => $product];
         return response()->json($data);
     }
 
